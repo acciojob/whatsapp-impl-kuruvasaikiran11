@@ -40,7 +40,7 @@ public class WhatsappController {
     }
 
     @PutMapping("/send-message")
-    public int sendMessage(Message message, User sender, Group group) throws Exception{
+    public int sendMessage(@RequestBody Message message, @RequestBody User sender, @RequestBody Group group) throws Exception{
         //Throw "Group does not exist" if the mentioned group does not exist
         //Throw "You are not allowed to send message" if the sender is not a member of the group
         //If the message is sent successfully, return the final number of messages in that group.
@@ -48,7 +48,7 @@ public class WhatsappController {
         return whatsappService.sendMessage(message, sender, group);
     }
     @PutMapping("/change-admin")
-    public String changeAdmin(User approver, User user, Group group) throws Exception{
+    public String changeAdmin(@RequestBody User approver, @RequestBody User user, @RequestBody Group group) throws Exception{
         //Throw "Group does not exist" if the mentioned group does not exist
         //Throw "Approver does not have rights" if the approver is not the current admin of the group
         //Throw "User is not a participant" if the user is not a part of the group
@@ -70,7 +70,7 @@ public class WhatsappController {
     }
 
     @GetMapping("/find-messages")
-    public String findMessage(Date start, Date end, int K) throws Exception{
+    public String findMessage(@RequestBody Date start, @RequestBody Date end, @RequestParam int K) throws Exception{
         //This is a bonus problem and does not contains any marks
         // Find the Kth latest message between start and end (excluding start and end)
         // If the number of messages between given time is less than K, throw "K is greater than the number of messages" exception
